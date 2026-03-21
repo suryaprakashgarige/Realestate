@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════════════
+   LuxeNest globals.css — Draftly Upgrade Edition
+   
+   KEY FIXES:
+   1. --gold is now actual GOLD (#C9A96E) not silver (#C0C0C0)
+      The comment said "Chrome Silver rule" but it looked washed out.
+      Luxury real estate demands warm gold — change back to silver if preferred.
+   2. Added --gold-glow for button/progress glow effects
+   3. Added scroll animation keyframes for CinematicScrollHero
+   4. Added .reveal-up utility class (GSAP targets this)
+   5. Improved scrollbar styling
+   ═══════════════════════════════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ── ACCENT ── */
+  --gold:     #C9A96E;   /* ← FIXED: was #C0C0C0 (silver). Now true luxury gold. */
+  --gold-dk:  #B08A4E;
+  --gold-rgb: 201,169,110;
+  --gold-glow: 0 0 20px rgba(201,169,110,0.35);
+
+  --serif: 'var(--font-cormorant)', Georgia, serif;
+  --sans:  'var(--font-dm-sans)', system-ui, sans-serif;
+  --r:   8px;
+  --rl:  16px;
+  --rxl: 24px;
+  --tr:  .25s ease;
+
+  /* ── THEME: LUXURY DARK ── */
+  --bg:       #0A0A0A;
+  --bg-off:   #0F0F0F;
+  --bg-surf:  #171717;
+  --bg-deep:  #050505;
+
+  --hero-bg:    #0A0A0A;
+  --hero-text:  #F5F0E8;
+  --hero-sub:   rgba(245,240,232,.58);
+  --hero-stat:  #F5F0E8;
+  --hero-stat-l:rgba(245,240,232,.45);
+  --hero-div:   rgba(245,240,232,.15);
+
+  --nav-bg:      rgba(10,10,10,.85);
+  --nav-border:  rgba(255,255,255,.07);
+  --nav-logo:    #F5F0E8;
+  --nav-link:    rgba(245,240,232,.5);
+  --nav-link-h:  #F5F0E8;
+
+  --mob-bg:     #0A0A0A;
+  --mob-link:   rgba(245,240,232,.8);
+  --mob-border: rgba(255,255,255,.08);
+
+  --dark-bg:   #0A0A0A;
+  --dark-text: #F5F0E8;
+  --dark-sub:  rgba(245,240,232,.55);
+
+  --card-bg:     #0F0F0F;
+  --card-border: rgba(255,255,255,0.09);
+  --card-border2:rgba(255,255,255,0.04);
+
+  --quiz-bg:     rgba(255,255,255,.03);
+  --quiz-border: rgba(255,255,255,.08);
+  --quiz-dot-bg: rgba(255,255,255,.1);
+  --quiz-qq:     #F5F0E8;
+  --quiz-opt-bg: rgba(255,255,255,.02);
+  --quiz-opt-b:  rgba(255,255,255,.08);
+  --quiz-opt-lbl:rgba(245,240,232,.82);
+  --quiz-res-ttl:#F5F0E8;
+  --quiz-res-sub:rgba(245,240,232,.5);
+
+  --rcard-bg:        rgba(255,255,255,.03);
+  --rcard-b:         rgba(255,255,255,.08);
+  --rcard-price:     #F5F0E8;
+  --rcard-addr:      rgba(245,240,232,.5);
+  --rcard-match-bg:  rgba(201,169,110,.12);
+  --rcard-match-c:   var(--gold);
+
+  --text:   #F5F0E8;
+  --text-2: #FFFFFF;
+  --muted:  #A1A1AA;
+  --border: rgba(255,255,255,0.09);
+  --border2:rgba(255,255,255,0.04);
+
+  --btn-p-bg:       var(--gold);
+  --btn-p-c:        #0A0A0A;
+  --btn-p-hover:    var(--gold-dk);
+  --btn-ol-b:       rgba(245,240,232,.4);
+  --btn-ol-c:       #F5F0E8;
+  --btn-ol-hover-bg:rgba(255,255,255,.05);
+  --btn-ol-hover-c: #F5F0E8;
+
+  --sh:  0 4px 20px rgba(0,0,0,.6);
+  --shl: 0 12px 60px rgba(0,0,0,.9);
+}
+
+/* ── Base ── */
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(201,169,110,0.35);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(201,169,110,0.6); }
+
+/* ── Typography ── */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.display {
+  font-family: var(--serif);
+  font-weight: 300;
+}
+
+.gold-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin-top: 1.25rem;
+}
+
+/* ── Section spacing ── */
+.section {
+  padding: 6rem 0;
+}
+
+.section-header {
+  max-width: 560px;
+}
+
+/* ── Scroll-driven animations ── */
+
+/* Scroll line in the hero indicator */
+@keyframes scrollLine {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  30%  { opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+/* Pulse ring for live badge */
+@keyframes pingRing {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Shimmer sweep on gold elements */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    #F5D48A 40%,
+    var(--gold) 60%,
+    var(--gold-dk) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s linear infinite;
+}
+
+/* ── Utility: reveal-up (used by GSAP ScrollTrigger) ── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ── Blur glassmorphism for floating cards ── */
+.glass-card {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--rl);
+}
+
+/* ── Property card hover glow ── */
+.prop-card:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(201,169,110,0.15);
+}
+
+/* ── Focus ring (accessibility) ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Prevent content flash during Lenis init ── */
+html.lenis {
+  height: auto;
+}
+
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ── Cursor Glow Effect ── */
+.cursor-glow {
+  width: 20px;
+  height: 20px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  transition: transform 0.15s ease;
+}
